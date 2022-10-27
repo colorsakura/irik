@@ -1,0 +1,36 @@
+import sqlite3
+
+from utils.logHandler import LogHandler
+
+log = LogHandler("UserDB")
+
+
+class UserDB:
+    __pools = None
+    __db_path = None
+
+    def __init__(self) -> None:
+        self.init_config
+        self.__init_tables()
+
+    def init_config(self):
+        self.db = "user.db"
+
+    def init_db(self):
+        pass
+
+    def __init_tables(self):
+        conn = self.__pools.get()
+        cursor = conn.cursor()
+        try:
+            # 用户信息表
+            cursor.execute('''CREATE TABLE IF NOT EXISTS USERS
+                                   (ID INTEGER PRIMARY KEY AUTOINCREMENT     NOT NULL,
+                                   NAME    TEXT,
+                                   PASSWORD    TEXT,
+                                   PRIS    TEXT);''')
+        except Exception as e:
+            log.error(f"【Db】创建数据库错误：{e}")
+        finally:
+            cursor.close()
+            self.__pools.free(conn)
