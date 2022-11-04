@@ -22,7 +22,7 @@ async def register(auth_details: AuthDetails):
     return {}
 
 
-@users.post('/login', summary="登录")
+@users.post('/login', summary="Login")
 async def login(auth_details: AuthDetails):
     user = None
     for x in user_list:
