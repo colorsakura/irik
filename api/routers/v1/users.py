@@ -1,5 +1,6 @@
-from core.auth import AuthHandler
 from fastapi import APIRouter, Depends, HTTPException
+
+from core.auth import AuthHandler
 from scheams.users import AuthDetails
 
 users = APIRouter(tags=["用户相关"])
